@@ -1,5 +1,5 @@
 package edu.pitt.cs;
-
+ 
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +19,13 @@ public class RentACatImpl implements RentACat {
 
 	public boolean returnCat(int id) {
 		// TODO
+		
+		for(int i = 0; i < cats.size(); i ++){
+			Cat tempCat = cats.get(i);
+			if(tempCat.getId() == id && tempCat.getRented() == true){
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -63,7 +70,22 @@ public class RentACatImpl implements RentACat {
 
 	public boolean catExists(int id) {
 		// TODO
-		return false;
+		//loop through list cats and check if there exists a cat with id.
+		//if no cats with that id exist return false.
+		//if list is null or is empty return false
+		if (cats == null || cats.size() == 0){
+			return false;
+		}
+		boolean result = false;
+		for(int i = 0; i < cats.size(); i ++){
+			Cat tempCat = cats.get(i);
+			if(id == tempCat.getId()){
+				result = true;
+				break;
+			}
+		}
+		
+		return result;
 	}
 
 	/**
@@ -146,7 +168,7 @@ public class RentACatImpl implements RentACat {
 
 		// Turn off automatic bug injection in the Cat class.
 		Cat.bugInjectionOn = false;
-
+		System.out.println(Cat.bugInjectionOn);
 		RentACat rc = new RentACatImpl();
 
 		rc.addCat(new Cat(1, "Jennyanydots"));
